@@ -16,8 +16,9 @@ limitations under the License.
 package cmd
 
 import (
-	corePlugins "github.com/nitroci/nitroci-core/pkg/core/plugins"
-	"github.com/nitroci/nitroci-cobra-plugin-core/pkg/plugins"
+	pkgCCPlugins "github.com/nitroci/nitroci-cobra-core/pkg/core/plugins"
+	pkgCCPPlugins "github.com/nitroci/nitroci-cobra-plugin-core/pkg/core/plugins"
+	pkgCPlugins "github.com/nitroci/nitroci-core/pkg/core/plugins"
 
 	"github.com/spf13/cobra"
 )
@@ -31,18 +32,18 @@ var pipelinesCmd = &cobra.Command{
 	Short: "Interact with the pipelines",
 	Long:  `Interact with the pipelines`,
 	Run: func(cmd *cobra.Command, args []string) {
-		plugins.PluginModule.Pipelines(runtimeContext, args, pipelinesFlags)
+		pkgCCPPlugins.PluginModule.Pipelines(runtimeContext, args, pipelinesFlags)
 	},
 }
 
 func initPipelinesConfig() {
-	pluginModel, _ := intPlugins.LoadPluginFile("./manifest.yml")
-	pipelinesFlags = LoadMapFromFlags(pipelinesCmd, pluginModel.Operations.Pipelines.Flags)
+	pluginModel, _ := pkgCPlugins.LoadPluginFile("./manifest.yml")
+	pipelinesFlags = pkgCCPlugins.LoadMapFromFlags(pipelinesCmd, pluginModel.Operations.Pipelines.Flags)
 }
 
 func init() {
 	cobra.OnInitialize(initPipelinesConfig)
 	rootCmd.AddCommand(pipelinesCmd)
-	pluginModel, _ := intPlugins.LoadPluginFile("./manifest.yml")
-	LoadFlags(pipelinesCmd, pluginModel.Operations.Pipelines.Flags)
+	pluginModel, _ := pkgCPlugins.LoadPluginFile("./manifest.yml")
+	pkgCCPlugins.LoadFlags(pipelinesCmd, pluginModel.Operations.Pipelines.Flags)
 }

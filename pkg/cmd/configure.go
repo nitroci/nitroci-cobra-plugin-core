@@ -16,9 +16,9 @@ limitations under the License.
 package cmd
 
 import (
-	corePlugins "github.com/nitroci/nitroci-core/pkg/core/plugins"
-	coreCbrPlugins "github.com/nitroci/nitroci-cobra-core/pkg/plugins"
-	"github.com/nitroci/nitroci-cobra-plugin-core/pkg/plugins"
+	pkgCCPlugins "github.com/nitroci/nitroci-cobra-core/pkg/core/plugins"
+	pkgCCPPlugins "github.com/nitroci/nitroci-cobra-plugin-core/pkg/core/plugins"
+	pkgCPlugins "github.com/nitroci/nitroci-core/pkg/core/plugins"
 
 	"github.com/spf13/cobra"
 )
@@ -33,13 +33,13 @@ var configureCmd = &cobra.Command{
 	Short: "Configurations management",
 	Long:  `Configurations management`,
 	Run: func(cmd *cobra.Command, args []string) {
-		plugins.PluginModule.Configure(runtimeContext, args, configureFlags)
+		pkgCCPPlugins.PluginModule.Configure(runtimeContext, args, configureFlags)
 	},
 }
 
 func initConfigureConfig() {
-	pluginModel, _ := corePlugins.LoadPluginFile("./manifest.yml")
-	configureFlags = coreCbrPlugins.LoadMapFromFlags(configureCmd, pluginModel.Operations.Configure.Flags)
+	pluginModel, _ := pkgCPlugins.LoadPluginFile("./manifest.yml")
+	configureFlags = pkgCCPlugins.LoadMapFromFlags(configureCmd, pluginModel.Operations.Configure.Flags)
 }
 
 func init() {
@@ -47,6 +47,6 @@ func init() {
 	rootCmd.AddCommand(configureCmd)
 	configureCmd.Flags().BoolVarP(&configureFlagShow, "show", "s", false, "show configurations")
 	configureCmd.Flags().BoolVarP(&configureFlagRaw, "raw", "r", false, "output raw configurations")
-	pluginModel, _ := corePlugins.LoadPluginFile("./manifest.yml")
-	coreCbrPlugins.LoadFlags(configureCmd, pluginModel.Operations.Configure.Flags)
+	pluginModel, _ := pkgCPlugins.LoadPluginFile("./manifest.yml")
+	pkgCCPlugins.LoadFlags(configureCmd, pluginModel.Operations.Configure.Flags)
 }

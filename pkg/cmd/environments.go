@@ -16,8 +16,9 @@ limitations under the License.
 package cmd
 
 import (
-	corePlugins "github.com/nitroci/nitroci-core/pkg/core/plugins"
-	"github.com/nitroci/nitroci-cobra-plugin-core/pkg/plugins"
+	pkgCCPlugins "github.com/nitroci/nitroci-cobra-core/pkg/core/plugins"
+	pkgCCPPlugins "github.com/nitroci/nitroci-cobra-plugin-core/pkg/core/plugins"
+	pkgCPlugins "github.com/nitroci/nitroci-core/pkg/core/plugins"
 
 	"github.com/spf13/cobra"
 )
@@ -31,18 +32,18 @@ var environmentsCmd = &cobra.Command{
 	Short: "Interact with the environments",
 	Long:  `Interact with the environments`,
 	Run: func(cmd *cobra.Command, args []string) {
-		plugins.PluginModule.Environments(runtimeContext, args, environmentsFlags)
+		pkgCCPPlugins.PluginModule.Environments(runtimeContext, args, environmentsFlags)
 	},
 }
 
 func initEnvironmentsConfig() {
-	pluginModel, _ := plugins.LoadPluginFile("./manifest.yml")
-	environmentsFlags = LoadMapFromFlags(environmentsCmd, pluginModel.Operations.Environments.Flags)
+	pluginModel, _ := pkgCPlugins.LoadPluginFile("./manifest.yml")
+	environmentsFlags = pkgCCPlugins.LoadMapFromFlags(environmentsCmd, pluginModel.Operations.Environments.Flags)
 }
 
 func init() {
 	cobra.OnInitialize(initEnvironmentsConfig)
 	rootCmd.AddCommand(environmentsCmd)
-	pluginModel, _ := plugins.LoadPluginFile("./manifest.yml")
-	LoadFlags(environmentsCmd, pluginModel.Operations.Environments.Flags)
+	pluginModel, _ := pkgCPlugins.LoadPluginFile("./manifest.yml")
+	pkgCCPlugins.LoadFlags(environmentsCmd, pluginModel.Operations.Environments.Flags)
 }

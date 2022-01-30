@@ -13,13 +13,13 @@ limitations under the License.
 package plugins
 
 import (
-	"github.com/nitroci/nitroci-core/pkg/core/contexts"
+	pkgCContexts "github.com/nitroci/nitroci-core/pkg/core/contexts"
 )
 
 type Plugin struct {
-	Configure func(context *contexts.RuntimeContext, args []string, fields map[string]interface{})
-	Environments func(context *contexts.RuntimeContext, args []string, fields map[string]interface{})
-	Pipelines func(context *contexts.RuntimeContext, args []string, fields map[string]interface{})
+	Configure func(context *pkgCContexts.RuntimeContext, args []string, fields map[string]interface{})
+	Environments func(context *pkgCContexts.RuntimeContext, args []string, fields map[string]interface{})
+	Pipelines func(context *pkgCContexts.RuntimeContext, args []string, fields map[string]interface{})
 }
 
 var PluginModule *Plugin
