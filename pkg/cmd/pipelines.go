@@ -17,7 +17,7 @@ package cmd
 
 import (
 	pkgCCPlugins "github.com/nitroci/nitroci-cobra-core/pkg/core/plugins"
-	pkgCCPPlugins "github.com/nitroci/nitroci-cobra-plugin-core/pkg/core/plugins"
+	pkg "github.com/nitroci/nitroci-cobra-plugin-core/pkg/core/plugins"
 	pkgCPlugins "github.com/nitroci/nitroci-core/pkg/core/plugins"
 
 	"github.com/spf13/cobra"
@@ -32,7 +32,7 @@ var pipelinesCmd = &cobra.Command{
 	Short: "Interact with the pipelines",
 	Long:  `Interact with the pipelines`,
 	Run: func(cmd *cobra.Command, args []string) {
-		pkgCCPPlugins.PluginModule.Pipelines(runtimeContext, args, pipelinesFlags)
+		pkg.PluginModule.Pipelines(runtimeContext, args, pipelinesFlags)
 	},
 }
 

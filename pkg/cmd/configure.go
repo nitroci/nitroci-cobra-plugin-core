@@ -17,7 +17,7 @@ package cmd
 
 import (
 	pkgCCPlugins "github.com/nitroci/nitroci-cobra-core/pkg/core/plugins"
-	pkgCCPPlugins "github.com/nitroci/nitroci-cobra-plugin-core/pkg/core/plugins"
+	pkg "github.com/nitroci/nitroci-cobra-plugin-core/pkg/core/plugins"
 	pkgCPlugins "github.com/nitroci/nitroci-core/pkg/core/plugins"
 
 	"github.com/spf13/cobra"
@@ -33,7 +33,7 @@ var configureCmd = &cobra.Command{
 	Short: "Configurations management",
 	Long:  `Configurations management`,
 	Run: func(cmd *cobra.Command, args []string) {
-		pkgCCPPlugins.PluginModule.Configure(runtimeContext, args, configureFlags)
+		pkg.PluginModule.Configure(runtimeContext, args, configureFlags)
 	},
 }
 
