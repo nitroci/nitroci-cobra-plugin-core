@@ -20,7 +20,6 @@ import (
 
 	pkgCContexts "github.com/nitroci/nitroci-core/pkg/core/contexts"
 	pkgCTerminal "github.com/nitroci/nitroci-core/pkg/core/terminal"
-	pkgCPlugins "github.com/nitroci/nitroci-core/pkg/core/plugins"
 
 	"github.com/spf13/cobra"
 )
@@ -50,7 +49,7 @@ func initConfig() {
 	verbose, _ := rootCmd.PersistentFlags().GetBool("verbose")
 	workspaceDepth, _ := rootCmd.PersistentFlags().GetInt("workspace")
 	var err error
-	runtimeContext, err = pkgCPlugins.LoadRuntimeContext(profile, "", workspaceDepth-1, verbose)
+	runtimeContext, err = pkgCContexts.LoadRuntimeContext(profile, "", workspaceDepth-1, verbose)
 	if err != nil {
 		pkgCTerminal.Println(pkgCTerminal.ConvertToRedColor(err.Error()))
 		os.Exit(1)
